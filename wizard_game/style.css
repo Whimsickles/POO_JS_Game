@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    background-color : black;
+    color : white;
+    flex-direction : column;
+    justify-content: flex-start;
+    align-items : center;
+    font-family: "arial"
+}
+
+#game{
+    display: flex;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+    flex-direction : column;
+    color : white;
+    text-align : center;
+    background-color: #D358F7;
+    width: 60vw;
+    height: 80vh;
+    border-radius: 15px;
+}
+
+#game select{
+    font-size: 1.3em;
+}
+
+#game input{
+    font-size: 1em;
+    text-align: center;
+}
+
+canvas{
+    background-color : #81F781;
+}

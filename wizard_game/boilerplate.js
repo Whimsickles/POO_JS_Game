@@ -1,3 +1,9 @@
+function draw_rect(pos, diagonal, color) {
+	ctx.beginPath();
+	ctx.fillStyle = color;
+	ctx.fillRect(pos.x, pos.y, diagonal.x, diagonal.y);
+}
+
 function draw_circle(pos, radius, color) {
 	ctx.beginPath();
 	ctx.fillStyle = color;
@@ -5,31 +11,16 @@ function draw_circle(pos, radius, color) {
 	ctx.fill();
 }
 
-function init() {
-	cnv = document.getElementById("canvas");
-	cnv.height = 640;
-	cnv.width = 1080;
-	cnv.style.height = cnv.height + "px";
-	cnv.style.width = cnv.width + "px";
-
-	ctx = cnv.getContext("2d");
-
-	setup();
-
-	hidden_loop();
-};
-
 function hidden_loop() {
-	ctx.clearRect(0, 0, cnv.width, cnv.height);
+	ctx.clearRect(0, 0, g.canvas.width, g.canvas.height);
+	g.current_stage.loop();
 
-	loop();
-
-	window.requestAnimationFrame(hidden_loop);
+	if (!g.current_stage.is_finished){
+		window.requestAnimationFrame(hidden_loop);
+	}
 };
 
-//window.onload = init;
-
-var cnv, ctx;
+var cnv, ctx, keys;
 
 /*! https://evanw.github.io/lightgl.js/docs/vector.html */
 function Vector(x, y) {
@@ -55,7 +46,7 @@ Vector.prototype = {
 			this.x -= v; this.y -= v;
 		}
 	},
-	mult: function(v) {
+	mul: function(v) {
 		if (v instanceof Vector) {
 			this.x *= v.x; this.y *= v.y;
 		} else {
